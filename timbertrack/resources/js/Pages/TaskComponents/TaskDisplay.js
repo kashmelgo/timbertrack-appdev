@@ -2,18 +2,9 @@ import React from 'react';
 import ValuesDisplay from '@/Pages/TaskComponents/ValuesDisplay'
 
 export default function TaskDisplay({employee, setEmployee}) {
+    const current = new Date();
+    const date= `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
 
-    const completeStatus = (e) =>{
-        setEmployee(employee.map((item) => {
-            if(item.id === e.target.value){
-
-                return{
-                    ...item , completed: !item.completed
-                }
-            }
-            return item;
-        }));
-    };
     return (
         <div className="my-5  flex space-x-10 ">
                 <div className= "bg-white container shadow-lg px-6 py-2 h-auto w-1/3">
@@ -22,7 +13,7 @@ export default function TaskDisplay({employee, setEmployee}) {
                         <h1>Past Due</h1>
 
                         {employee.map( employees => {
-                            if(employees.day === 'Past'){
+                            if(employees.day < date){
                                 return(
                                     <ValuesDisplay
                                     key= {employees.id}
@@ -47,7 +38,7 @@ export default function TaskDisplay({employee, setEmployee}) {
                         <h1>Today</h1>
 
                         {employee.map( employees => {
-                            if(employees.day === 'Today'){
+                            if(employees.day === date){
                                 return(
                                     <ValuesDisplay
                                     key= {employees.id}
@@ -70,7 +61,7 @@ export default function TaskDisplay({employee, setEmployee}) {
                         <h1>Tomorrow</h1>
 
                         {employee.map( employees => {
-                            if(employees.day === 'Tomorrow'){
+                            if(employees.day > date){
                                 return(
                                     <ValuesDisplay
                                     key= {employees.id}

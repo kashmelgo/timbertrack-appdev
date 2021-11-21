@@ -8,9 +8,14 @@ import { Inertia } from '@inertiajs/inertia';
 
 export default function Task(props) {
 
-    const [inputText, setInputText] = useState("");
-    const [employee, setEmployee] = useState([]);
-    const [day, setDay] = useState("Today");
+
+    const [employee, setEmployee] = useState({
+        employee_id: "",
+        task: "",
+        day: "Today",
+        isFinished: false,
+    });
+
 
 
     return (
@@ -30,10 +35,7 @@ export default function Task(props) {
 
                     <div className="p-5 bg-white border-b border-gray-200 ">
                         <Form
-                             inputText={inputText}
-                             setInputText={setInputText}
-                             day = {day}
-                             setDay={setDay}
+
                              employee = {employee}
                              setEmployee = {setEmployee}
 
