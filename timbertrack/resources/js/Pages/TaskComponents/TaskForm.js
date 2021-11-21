@@ -1,12 +1,16 @@
 import React from 'react';
 
 
-export default function Form({inputText, setInputText, setDay, day,employee, setEmployee}) {
+export default function Form({inputText, setInputText, setDay, day,employee, employed, setEmployed, setEmployee}) {
 
     const inputTextHandler = (e) =>{
         setInputText(e.target.value);
 
     };
+
+    const setEmployer = (e) => {
+        setEmployed(e.target.value);
+    }
 
     const daySet = (e) =>{
         setDay(e.target.value);
@@ -20,7 +24,7 @@ export default function Form({inputText, setInputText, setDay, day,employee, set
 
 
       setEmployee([
-            ...employee, {task: inputText , day: day, completed:false, id: Math.random() * 1000}
+            ...employee, {task: inputText , employee:employed , day: day, completed:false, id: Math.random() * 1000}
         ]);
 
         setInputText('');
@@ -28,9 +32,10 @@ export default function Form({inputText, setInputText, setDay, day,employee, set
 
     return (
         <form className="space-x-6">
-            <select value= "" className= "border-b border-gray-200">
+            <select onChange={setEmployer} className= "border-b border-gray-200">
                     <option value="Destination" selected disabled hidden>Employee </option>
                     <option value="John Legend">John Legend</option>
+                    <option value="ariana">Grande</option>
             </select>
 
             <input type="text" value = {inputText} onChange= {inputTextHandler} className= "border-b border-gray-200 w-3/5" placeholder="Task . . ."></input>

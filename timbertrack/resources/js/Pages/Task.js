@@ -10,6 +10,7 @@ export default function Task(props) {
     const [inputText, setInputText] = useState("");
     const [employee, setEmployee] = useState([]);
     const [day, setDay] = useState("Today");
+    const [employed, setEmployed] = useState([]);
 
 
     return (
@@ -34,6 +35,8 @@ export default function Task(props) {
                              day = {day}
                              setDay={setDay}
                              employee = {employee}
+                             employed = {employed}
+                             setEmployed={setEmployed}
                              setEmployee = {setEmployee}
 
                         />
@@ -45,6 +48,7 @@ export default function Task(props) {
                     </div>
                      {/* end admin */}
                     <TaskDisplay
+                         employed = {employed}
                          employee = {employee}
                          setEmployee = {setEmployee}
                          />

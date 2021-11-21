@@ -5532,6 +5532,11 @@ function Task(props) {
       day = _useState6[0],
       setDay = _useState6[1];
 
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState8 = _slicedToArray(_useState7, 2),
+      employed = _useState8[0],
+      setEmployed = _useState8[1];
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_Layouts_Authenticated__WEBPACK_IMPORTED_MODULE_1__["default"], {
     auth: props.auth,
     errors: props.errors,
@@ -5555,10 +5560,13 @@ function Task(props) {
               day: day,
               setDay: setDay,
               employee: employee,
+              employed: employed,
+              setEmployed: setEmployed,
               setEmployee: setEmployee
             })
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_TaskComponents_TaskDisplay__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          employed: employed,
           employee: employee,
           setEmployee: setEmployee
         })]
@@ -5583,32 +5591,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _Pages_TaskComponents_ValuesDisplay__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Pages/TaskComponents/ValuesDisplay */ "./resources/js/Pages/TaskComponents/ValuesDisplay.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
 
 function TaskDisplay(_ref) {
   var employee = _ref.employee,
-      setEmployee = _ref.setEmployee;
-
-  var completeStatus = function completeStatus(e) {
-    setEmployee(employee.map(function (item) {
-      if (item.id === e.target.value) {
-        return _objectSpread(_objectSpread({}, item), {}, {
-          completed: !item.completed
-        });
-      }
-
-      return item;
-    }));
-  };
-
+      setEmployee = _ref.setEmployee,
+      employed = _ref.employed;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
     className: "my-5  flex space-x-10 ",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
@@ -5617,7 +5607,7 @@ function TaskDisplay(_ref) {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
           children: "Past Due"
         }), employee.map(function (employees) {
-          if (employees.day === 'Past') {
+          if (employees.employee === employed && employees.day === 'Past') {
             return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_Pages_TaskComponents_ValuesDisplay__WEBPACK_IMPORTED_MODULE_1__["default"], {
               setEmployee: setEmployee,
               employees: employees,
@@ -5633,7 +5623,7 @@ function TaskDisplay(_ref) {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
           children: "Today"
         }), employee.map(function (employees) {
-          if (employees.day === 'Today') {
+          if (employees.employee === employed && employees.day === 'Today') {
             return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_Pages_TaskComponents_ValuesDisplay__WEBPACK_IMPORTED_MODULE_1__["default"], {
               setEmployee: setEmployee,
               employees: employees,
@@ -5649,7 +5639,7 @@ function TaskDisplay(_ref) {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
           children: "Tomorrow"
         }), employee.map(function (employees) {
-          if (employees.day === 'Tomorrow') {
+          if (employees.employee === employed && employees.day === 'Tomorrow') {
             return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_Pages_TaskComponents_ValuesDisplay__WEBPACK_IMPORTED_MODULE_1__["default"], {
               setEmployee: setEmployee,
               employees: employees,
@@ -5699,10 +5689,16 @@ function Form(_ref) {
       setDay = _ref.setDay,
       day = _ref.day,
       employee = _ref.employee,
+      employed = _ref.employed,
+      setEmployed = _ref.setEmployed,
       setEmployee = _ref.setEmployee;
 
   var inputTextHandler = function inputTextHandler(e) {
     setInputText(e.target.value);
+  };
+
+  var setEmployer = function setEmployer(e) {
+    setEmployed(e.target.value);
   };
 
   var daySet = function daySet(e) {
@@ -5713,6 +5709,7 @@ function Form(_ref) {
     e.preventDefault();
     setEmployee([].concat(_toConsumableArray(employee), [{
       task: inputText,
+      employee: employed,
       day: day,
       completed: false,
       id: Math.random() * 1000
@@ -5723,7 +5720,7 @@ function Form(_ref) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("form", {
     className: "space-x-6",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("select", {
-      value: "",
+      onChange: setEmployer,
       className: "border-b border-gray-200",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("option", {
         value: "Destination",
@@ -5734,6 +5731,9 @@ function Form(_ref) {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("option", {
         value: "John Legend",
         children: "John Legend"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("option", {
+        value: "ariana",
+        children: "Grande"
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
       type: "text",
