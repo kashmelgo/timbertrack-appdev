@@ -3,6 +3,7 @@ import Authenticated from '@/Layouts/Authenticated';
 import { Head } from '@inertiajs/inertia-react';
 import Form from './TaskComponents/TaskForm';
 import TaskDisplay from './TaskComponents/TaskDisplay';
+import { Inertia } from '@inertiajs/inertia';
 
 
 export default function Task(props) {
@@ -23,7 +24,7 @@ export default function Task(props) {
 
 
             <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+             <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                      {/* admin */}
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 

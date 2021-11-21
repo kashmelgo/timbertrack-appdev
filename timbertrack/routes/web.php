@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TaskController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -28,9 +29,12 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/task', function () {
-    return Inertia::render('Task');
-})->middleware(['auth', 'verified'])->name('task');
+// Route::get('/task', function () {
+//     return Inertia::render('Task');
+// })->middleware(['auth', 'verified'])->name('task');
+
+Route::get('/task', [TaskController::class, 'index'])->name('task');
+Route::post('/task', [TaskController::class, 'store'])->name('task.store');
 
 require __DIR__.'/auth.php';
 
