@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import Authenticated from '@/Layouts/Authenticated';
 import { Head } from '@inertiajs/inertia-react';
 import Form from './TaskComponents/TaskForm';
-import TaskDisplay from './TaskComponents/TaskDisplay';
+import PayrollDisplay from './TaskComponents/TaskDisplay';
 import { Inertia } from '@inertiajs/inertia';
 
 
