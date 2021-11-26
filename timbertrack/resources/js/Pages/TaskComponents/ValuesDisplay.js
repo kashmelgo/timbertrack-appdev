@@ -8,17 +8,12 @@ const ValueDisplay= ({task, List, employee})=>{
         Inertia.delete(route("task.destroy", List.id));
     };
 
-    // const completeStatus = (e) =>{
-    //     setEmployee(employee.map((item) => {
-    //         if(item.id === employees.id){
+    function finishTask(){
+        console.log("helo");
+        Inertia.post(route("task.finishTask", List.id));
+    };
 
-    //             return{
-    //                 ...item , completed: !item.completed
-    //             }
-    //         }
-    //         return item;
-    //     }));
-    // };
+
 
     return(
         <div  className="rounded-lg p-2 my-3 bg-gray-100 neumorph-1 text-center text-gray-800">
@@ -29,8 +24,9 @@ const ValueDisplay= ({task, List, employee})=>{
         >
             {task}
             <br/>
-            {/* onClick={completeStatus} */}
-           <button   className="rounded-full h-7 w-7 border-2 border-black-200 mx-2 hover:border-black">
+
+
+           <button onClick={finishTask} className="rounded-full h-7 w-7 border-2 border-black-200 mx-2 hover:border-black">
             <svg className="h-5 w-5 text-black mx-0.5"  width="24" height="24" viewBox="0 0 24 24"
              stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
             <path stroke="none" d="M0 0h24v24H0z"/>
@@ -40,9 +36,6 @@ const ValueDisplay= ({task, List, employee})=>{
             {(List.isFinished)?<line x1="6" y1="6" x2="18" y2="18" />: undefined}
 
               </svg>
-
-
-
             </button>
 
             {/* admin */}

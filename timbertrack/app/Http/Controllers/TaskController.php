@@ -33,7 +33,18 @@ class TaskController extends Controller
 
     public function destroy(Request $request)
     {
-        $request->delete();
+        $task = Task::find($request->id);
+        $task->delete();
+
+        return redirect('/task');
+    }
+
+    public function finishTask(Request $request){
+
+        $task = Task::find($request->id);
+        $task->isFinished = !($task->isFinished);
+
+        $task->save();
 
         return redirect('/task');
     }

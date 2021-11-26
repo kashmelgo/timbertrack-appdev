@@ -35,6 +35,8 @@ Route::get('/dashboard', function () {
 
 Route::get('/task', [TaskController::class, 'index'])->name('task');
 Route::post('/task', [TaskController::class, 'store'])->name('task.store');
+Route::post('/task/{id}', [TaskController::class, 'finishTask'])->name('task.finishTask');
+Route::delete('/task/{id}', [TaskController::class, 'destroy'])->name('task.destroy');
 
 require __DIR__.'/auth.php';
 
