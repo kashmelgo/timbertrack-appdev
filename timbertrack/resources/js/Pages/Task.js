@@ -6,16 +6,20 @@ import TaskDisplay from './TaskComponents/TaskDisplay';
 import { Inertia } from '@inertiajs/inertia';
 
 
+
 export default function Task(props) {
 
+    const current = new Date();
+    const date= `${current.getMonth()+1}/${current.getDate()}/${current.getFullYear()}`;
 
     const [employee, setEmployee] = useState({
         employee_id: "",
         task: "",
-        day: "Today",
+        day: date,
         isFinished: false,
     });
 
+    const [inputText, setInputText] = useState("");
 
 
     return (
@@ -35,7 +39,8 @@ export default function Task(props) {
 
                     <div className="p-5 bg-white border-b border-gray-200 ">
                         <Form
-
+                             inputText = {inputText}
+                             setInputText = {setInputText}
                              employee = {employee}
                              setEmployee = {setEmployee}
 
@@ -45,11 +50,13 @@ export default function Task(props) {
                     </div>
 
 
+
                     </div>
                      {/* end admin */}
                     <TaskDisplay
                          employee = {employee}
-                         setEmployee = {setEmployee}
+                         List = {props.task}
+
                          />
                 </div>
             </div>

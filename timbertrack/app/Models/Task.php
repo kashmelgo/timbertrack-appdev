@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Task extends Model
 {
@@ -15,4 +16,9 @@ class Task extends Model
         'employee_id',
         'isFinished' => 'false',
     ];
+
+    public function setTransactionDateAttribute($value)
+    {
+        $this->attributes['day'] = Carbon::createFromFormat('m/d/Y', $value)->format('Y-m-d');
+    }
 }

@@ -5519,15 +5519,23 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function Task(props) {
+  var current = new Date();
+  var date = "".concat(current.getMonth() + 1, "/").concat(current.getDate(), "/").concat(current.getFullYear());
+
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
     employee_id: "",
     task: "",
-    day: "Today",
+    day: date,
     isFinished: false
   }),
       _useState2 = _slicedToArray(_useState, 2),
       employee = _useState2[0],
       setEmployee = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+      _useState4 = _slicedToArray(_useState3, 2),
+      inputText = _useState4[0],
+      setInputText = _useState4[1];
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_Layouts_Authenticated__WEBPACK_IMPORTED_MODULE_1__["default"], {
     auth: props.auth,
@@ -5547,13 +5555,15 @@ function Task(props) {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
             className: "p-5 bg-white border-b border-gray-200 ",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_TaskComponents_TaskForm__WEBPACK_IMPORTED_MODULE_3__["default"], {
+              inputText: inputText,
+              setInputText: setInputText,
               employee: employee,
               setEmployee: setEmployee
             })
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_TaskComponents_TaskDisplay__WEBPACK_IMPORTED_MODULE_4__["default"], {
           employee: employee,
-          setEmployee: setEmployee
+          List: props.task
         })]
       })
     })]
@@ -5582,9 +5592,9 @@ __webpack_require__.r(__webpack_exports__);
 
 function TaskDisplay(_ref) {
   var employee = _ref.employee,
-      setEmployee = _ref.setEmployee;
+      List = _ref.List;
   var current = new Date();
-  var date = "".concat(current.getDate(), "/").concat(current.getMonth() + 1, "/").concat(current.getFullYear());
+  var date = "".concat(current.getFullYear(), "-").concat(current.getMonth() + 1, "-").concat(current.getDate());
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
     className: "my-5  flex space-x-10 ",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
@@ -5592,14 +5602,13 @@ function TaskDisplay(_ref) {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("center", {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
           children: "Past Due"
-        }), employee.map(function (employees) {
-          if (employees.day < date) {
+        }), List.map(function (list) {
+          if (list.employee_id == employee.employee_id && list.day < date) {
             return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_Pages_TaskComponents_ValuesDisplay__WEBPACK_IMPORTED_MODULE_1__["default"], {
-              setEmployee: setEmployee,
-              employees: employees,
+              List: list,
               employee: employee,
-              task: employees.task
-            }, employees.id);
+              task: list.task_name
+            }, employee.id);
           }
         })]
       })
@@ -5608,14 +5617,13 @@ function TaskDisplay(_ref) {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("center", {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
           children: "Today"
-        }), employee.map(function (employees) {
-          if (employees.day === date) {
+        }), List.map(function (list) {
+          if (list.employee_id == employee.employee_id && list.day == date) {
             return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_Pages_TaskComponents_ValuesDisplay__WEBPACK_IMPORTED_MODULE_1__["default"], {
-              setEmployee: setEmployee,
-              employees: employees,
+              List: list,
               employee: employee,
-              task: employees.task
-            }, employees.id);
+              task: list.task_name
+            }, employee.id);
           }
         })]
       })
@@ -5624,14 +5632,13 @@ function TaskDisplay(_ref) {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("center", {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
           children: "Tomorrow"
-        }), employee.map(function (employees) {
-          if (employees.day > date) {
+        }), List.map(function (list) {
+          if (list.employee_id == employee.employee_id && list.day > date) {
             return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_Pages_TaskComponents_ValuesDisplay__WEBPACK_IMPORTED_MODULE_1__["default"], {
-              setEmployee: setEmployee,
-              employees: employees,
+              List: list,
               employee: employee,
-              task: employees.task
-            }, employees.id);
+              task: list.task_name
+            }, employee.id);
           }
         })]
       })
@@ -5653,7 +5660,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ Form)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -5663,9 +5671,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 function Form(_ref) {
   var employee = _ref.employee,
-      setEmployee = _ref.setEmployee;
+      setEmployee = _ref.setEmployee,
+      inputText = _ref.inputText,
+      setInputText = _ref.setInputText;
+
+  var TextHandler = function TextHandler(e) {
+    setInputText(e.target.value);
+  };
+
+  var textInput = function textInput() {
+    setEmployee(function (employee) {
+      return _objectSpread(_objectSpread({}, employee), {}, {
+        task: inputText
+      });
+    });
+  };
 
   var handleChange = function handleChange(e) {
     var key = e.target.id;
@@ -5673,59 +5696,63 @@ function Form(_ref) {
     var current = new Date();
 
     if (value === "Today") {
-      value = "".concat(current.getDate(), "/").concat(current.getMonth() + 1, "/").concat(current.getFullYear());
+      value = "".concat(current.getMonth() + 1, "/").concat(current.getDate(), "/").concat(current.getFullYear());
     } else if (value === "Tomorrow") {
-      value = "".concat(current.getDate() + 1, "/").concat(current.getMonth() + 1, "/").concat(current.getFullYear());
+      value = "".concat(current.getMonth() + 1, "/").concat(current.getDate() + 1, "/").concat(current.getFullYear());
     }
 
-    setEmployee(function (values) {
-      return _objectSpread(_objectSpread({}, values), {}, _defineProperty({}, key, value));
+    setEmployee(function (employee) {
+      return _objectSpread(_objectSpread({}, employee), {}, _defineProperty({}, key, value));
     });
   };
 
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
-    Inertia.post('/task', values);
+    _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia.post('/task', employee);
+    setInputText(" ");
   };
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("form", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("form", {
     className: "space-x-6",
     onSubmit: handleSubmit,
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("select", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("select", {
       id: "employee_id",
       value: employee.employee_id,
       onChange: handleChange,
       className: "border-b border-gray-200",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("option", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
         value: "Destination",
         selected: true,
-        disabled: true,
         hidden: true,
         children: "Employee "
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("option", {
-        value: "John Legend",
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+        value: "32",
         children: "John Legend"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+        value: "12",
+        children: "Grande"
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
       type: "text",
       id: "task",
-      value: employee.task,
-      onChange: handleChange,
+      value: inputText,
+      onChange: TextHandler,
       className: "border-b border-gray-200 w-3/5",
       placeholder: "Task . . ."
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("select", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("select", {
       id: "day",
       onChange: handleChange,
       className: "border-b border-gray-200",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("option", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
         value: "Today",
         children: "Today"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("option", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
         value: "Tomorrow",
         children: "Tomorrow"
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
       type: "submit",
+      onClick: textInput,
       className: "bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow",
       children: "Insert"
     })]
@@ -5745,13 +5772,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 
@@ -5759,66 +5782,31 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var ValueDisplay = function ValueDisplay(_ref) {
   var task = _ref.task,
-      employees = _ref.employees,
-      employee = _ref.employee,
-      setEmployee = _ref.setEmployee;
+      List = _ref.List,
+      employee = _ref.employee;
 
-  var deleteHandler = function deleteHandler() {
-    setEmployee(employee.filter(function (el) {
-      return el.id !== employees.id;
-    }));
-  };
+  function deleteHandler() {
+    _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__.Inertia["delete"](route("task.destroy", List.id));
+  }
 
-  var completeStatus = function completeStatus(e) {
-    setEmployee(employee.map(function (item) {
-      if (item.id === employees.id) {
-        return _objectSpread(_objectSpread({}, item), {}, {
-          completed: !item.completed
-        });
-      }
+  ; // const completeStatus = (e) =>{
+  //     setEmployee(employee.map((item) => {
+  //         if(item.id === employees.id){
+  //             return{
+  //                 ...item , completed: !item.completed
+  //             }
+  //         }
+  //         return item;
+  //     }));
+  // };
 
-      return item;
-    }));
-  };
-
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
     className: "rounded-lg p-2 my-3 bg-gray-100 neumorph-1 text-center text-gray-800",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-      className: "bg-white p-5 ".concat(employees.completed ? "opacity-50 line-through hover:no-underline hover:opacity-100" : "", " "),
-      children: [task, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
-        onClick: completeStatus,
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      className: "bg-white p-5 ".concat(List.isFinished ? "opacity-50 line-through hover:no-underline hover:opacity-100" : "", " "),
+      children: [task, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
         className: "rounded-full h-7 w-7 border-2 border-black-200 mx-2 hover:border-black",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("svg", {
-          "class": "h-5 w-5 text-black mx-0.5",
-          width: "24",
-          height: "24",
-          viewBox: "0 0 24 24",
-          "stroke-width": "2",
-          stroke: "currentColor",
-          fill: "none",
-          "stroke-linecap": "round",
-          "stroke-linejoin": "round",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("path", {
-            stroke: "none",
-            d: "M0 0h24v24H0z"
-          }), employees.completed ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("line", {
-            x1: "18",
-            y1: "6",
-            x2: "6",
-            y2: "18"
-          }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("path", {
-            d: "M5 12l5 5l10 -10"
-          }), employees.completed ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("line", {
-            x1: "6",
-            y1: "6",
-            x2: "18",
-            y2: "18"
-          }) : undefined]
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
-        onClick: deleteHandler,
-        className: "rounded-full h-7 w-7 border-2 border-black-200  hover:border-black",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("svg", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("svg", {
           className: "h-5 w-5 text-black mx-0.5",
           width: "24",
           height: "24",
@@ -5828,27 +5816,57 @@ var ValueDisplay = function ValueDisplay(_ref) {
           fill: "none",
           "stroke-linecap": "round",
           "stroke-linejoin": "round",
-          children: ["  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("path", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("path", {
             stroke: "none",
             d: "M0 0h24v24H0z"
-          }), "  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("line", {
+          }), List.isFinished ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("line", {
+            x1: "18",
+            y1: "6",
+            x2: "6",
+            y2: "18"
+          }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("path", {
+            d: "M5 12l5 5l10 -10"
+          }), List.isFinished ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("line", {
+            x1: "6",
+            y1: "6",
+            x2: "18",
+            y2: "18"
+          }) : undefined]
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+        onClick: deleteHandler,
+        className: "rounded-full h-7 w-7 border-2 border-black-200  hover:border-black",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("svg", {
+          className: "h-5 w-5 text-black mx-0.5",
+          width: "24",
+          height: "24",
+          viewBox: "0 0 24 24",
+          "stroke-width": "2",
+          stroke: "currentColor",
+          fill: "none",
+          "stroke-linecap": "round",
+          "stroke-linejoin": "round",
+          children: ["  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("path", {
+            stroke: "none",
+            d: "M0 0h24v24H0z"
+          }), "  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("line", {
             x1: "4",
             y1: "7",
             x2: "20",
             y2: "7"
-          }), "  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("line", {
+          }), "  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("line", {
             x1: "10",
             y1: "11",
             x2: "10",
             y2: "17"
-          }), "  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("line", {
+          }), "  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("line", {
             x1: "14",
             y1: "11",
             x2: "14",
             y2: "17"
-          }), "  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("path", {
+          }), "  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("path", {
             d: "M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"
-          }), "  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("path", {
+          }), "  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("path", {
             d: "M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"
           })]
         })

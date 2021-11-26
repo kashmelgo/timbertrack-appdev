@@ -1,9 +1,9 @@
 import React from 'react';
 import ValuesDisplay from '@/Pages/TaskComponents/ValuesDisplay'
 
-export default function TaskDisplay({employee, setEmployee}) {
+export default function TaskDisplay({employee, List}) {
     const current = new Date();
-    const date= `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+    const date= `${current.getFullYear()}-${current.getMonth()+1}-${current.getDate()}`;
 
     return (
         <div className="my-5  flex space-x-10 ">
@@ -12,15 +12,16 @@ export default function TaskDisplay({employee, setEmployee}) {
 
                         <h1>Past Due</h1>
 
-                        {employee.map( employees => {
-                            if(employees.day < date){
+                        {List.map( list => {
+
+                            if(list.employee_id == employee.employee_id && list.day < date ){
+
                                 return(
                                     <ValuesDisplay
-                                    key= {employees.id}
-                                    setEmployee = {setEmployee}
-                                    employees={employees}
-                                    employee={employee}
-                                    task={employees.task}
+                                        key= {employee.id}
+                                        List = {list}
+                                        employee={employee}
+                                        task={list.task_name}
                                     />
                                 );
                             }
@@ -37,20 +38,21 @@ export default function TaskDisplay({employee, setEmployee}) {
                     <center>
                         <h1>Today</h1>
 
-                        {employee.map( employees => {
-                            if(employees.day === date){
+                         {List.map( list => {
+
+                            if(list.employee_id == employee.employee_id && list.day == date ){
+
                                 return(
                                     <ValuesDisplay
-                                    key= {employees.id}
-                                    setEmployee = {setEmployee}
-                                    employees={employees}
-                                    employee={employee}
-                                    task={employees.task}
+                                        key= {employee.id}
+                                        List = {list}
+                                        employee={employee}
+                                        task={list.task_name}
                                     />
                                 );
-
                             }
                             })}
+
 
 
                     </center>
@@ -60,22 +62,20 @@ export default function TaskDisplay({employee, setEmployee}) {
                     <center>
                         <h1>Tomorrow</h1>
 
-                        {employee.map( employees => {
-                            if(employees.day > date){
+                        {List.map( list => {
+
+                            if(list.employee_id == employee.employee_id && list.day > date ){
+
                                 return(
                                     <ValuesDisplay
-                                    key= {employees.id}
-                                    setEmployee = {setEmployee}
-                                    employees={employees}
-                                    employee={employee}
-                                    task={employees.task}
+                                        key= {employee.id}
+                                        List = {list}
+                                        employee={employee}
+                                        task={list.task_name}
                                     />
                                 );
                             }
                             })}
-
-
-
 
                     </center>
                 </div>
