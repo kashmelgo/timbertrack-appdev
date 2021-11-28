@@ -32,5 +32,9 @@ Route::get('/task', function () {
     return Inertia::render('Task');
 })->middleware(['auth', 'verified'])->name('task');
 
+Route::get('/report', function () {
+    return Inertia::render('Report');
+})->middleware(['auth', 'verified'])->name('report');
+
 require __DIR__.'/auth.php';
 

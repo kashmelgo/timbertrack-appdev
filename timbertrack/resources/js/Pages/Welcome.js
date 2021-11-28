@@ -15,6 +15,10 @@ export default function Welcome(props) {
 
                         <Link href={route('task')} className="text-sm text-gray-700">
                             Task
+
+                        </Link>
+                        <Link href={route('report')} className="text-sm text-gray-700">
+                            Report
                         </Link>
                     </>
                     ) : (

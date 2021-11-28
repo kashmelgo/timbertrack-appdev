@@ -28,6 +28,12 @@
         "tailwindcss": "^2.1.2"
     },
     "dependencies": {
-        "react-router-dom": "^6.0.2"
+        "@patternfly/patternfly": "^4.159.1",
+        "@patternfly/react-core": "^4.175.4",
+        "chart.js": "^3.6.0",
+        "mdbreact": "^5.2.0",
+        "react-chartjs-2": "^4.0.0",
+        "react-router-dom": "^6.0.2",
+        "recharts": "^2.1.6"
     }
 }
