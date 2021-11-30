@@ -5521,6 +5521,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 function Task(props) {
   var current = new Date();
   var date = "".concat(current.getMonth() + 1, "/").concat(current.getDate(), "/").concat(current.getFullYear());
+  var usertype = props.auth.user.usertype;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
     employee_id: "",
@@ -5531,6 +5532,8 @@ function Task(props) {
       _useState2 = _slicedToArray(_useState, 2),
       employee = _useState2[0],
       setEmployee = _useState2[1];
+
+  console.log(employee);
 
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
       _useState4 = _slicedToArray(_useState3, 2),
@@ -5550,7 +5553,7 @@ function Task(props) {
       className: "py-12",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
         className: "max-w-7xl mx-auto sm:px-6 lg:px-8",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+        children: [usertype == "admin" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
           className: "bg-white overflow-hidden shadow-sm sm:rounded-lg",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
             className: "p-5 bg-white border-b border-gray-200 ",
@@ -5558,12 +5561,14 @@ function Task(props) {
               inputText: inputText,
               setInputText: setInputText,
               employee: employee,
-              setEmployee: setEmployee
+              setEmployee: setEmployee,
+              listEmployees: props.employee
             })
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_TaskComponents_TaskDisplay__WEBPACK_IMPORTED_MODULE_4__["default"], {
           employee: employee,
-          List: props.task
+          List: props.task,
+          user: props.auth.user
         })]
       })
     })]
@@ -5592,7 +5597,9 @@ __webpack_require__.r(__webpack_exports__);
 
 function TaskDisplay(_ref) {
   var employee = _ref.employee,
-      List = _ref.List;
+      List = _ref.List,
+      usertype = _ref.usertype,
+      user = _ref.user;
   var current = new Date();
   var date = "".concat(current.getFullYear(), "-").concat(current.getMonth() + 1, "-").concat(current.getDate());
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
@@ -5603,11 +5610,12 @@ function TaskDisplay(_ref) {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
           children: "Past Due"
         }), List.map(function (list) {
-          if (list.employee_id == employee.employee_id && list.day < date) {
+          if (list.day == date && list.employee_id == employee.employee_id && (list.employee_id == user.id || user.usertype == "admin")) {
             return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_Pages_TaskComponents_ValuesDisplay__WEBPACK_IMPORTED_MODULE_1__["default"], {
               List: list,
               employee: employee,
-              task: list.task_name
+              task: list.task_name,
+              usertype: user.usertype
             }, employee.id);
           }
         })]
@@ -5618,11 +5626,12 @@ function TaskDisplay(_ref) {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
           children: "Today"
         }), List.map(function (list) {
-          if (list.employee_id == employee.employee_id && list.day == date) {
+          if (list.day == date && list.employee_id == employee.employee_id && (list.employee_id == user.id || user.usertype == "admin")) {
             return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_Pages_TaskComponents_ValuesDisplay__WEBPACK_IMPORTED_MODULE_1__["default"], {
               List: list,
               employee: employee,
-              task: list.task_name
+              task: list.task_name,
+              usertype: user.usertype
             }, employee.id);
           }
         })]
@@ -5633,11 +5642,12 @@ function TaskDisplay(_ref) {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
           children: "Tomorrow"
         }), List.map(function (list) {
-          if (list.employee_id == employee.employee_id && list.day > date) {
+          if (list.day == date && list.employee_id == employee.employee_id && (list.employee_id == user.id || user.usertype == "admin")) {
             return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_Pages_TaskComponents_ValuesDisplay__WEBPACK_IMPORTED_MODULE_1__["default"], {
               List: list,
               employee: employee,
-              task: list.task_name
+              task: list.task_name,
+              usertype: user.usertype
             }, employee.id);
           }
         })]
@@ -5676,7 +5686,8 @@ function Form(_ref) {
   var employee = _ref.employee,
       setEmployee = _ref.setEmployee,
       inputText = _ref.inputText,
-      setInputText = _ref.setInputText;
+      setInputText = _ref.setInputText,
+      listEmployees = _ref.listEmployees;
 
   var TextHandler = function TextHandler(e) {
     setInputText(e.target.value);
@@ -5725,12 +5736,11 @@ function Form(_ref) {
         selected: true,
         hidden: true,
         children: "Employee "
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
-        value: "32",
-        children: "John Legend"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
-        value: "12",
-        children: "Grande"
+      }), listEmployees.map(function (employee) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+          value: employee.id,
+          children: employee.name
+        });
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
       type: "text",
@@ -5783,7 +5793,8 @@ __webpack_require__.r(__webpack_exports__);
 var ValueDisplay = function ValueDisplay(_ref) {
   var task = _ref.task,
       List = _ref.List,
-      employee = _ref.employee;
+      employee = _ref.employee,
+      usertype = _ref.usertype;
 
   function deleteHandler() {
     _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__.Inertia["delete"](route("task.destroy", List.id));
@@ -5792,85 +5803,125 @@ var ValueDisplay = function ValueDisplay(_ref) {
   ;
 
   function finishTask() {
-    console.log("helo");
     _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__.Inertia.post(route("task.finishTask", List.id));
   }
 
   ;
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-    className: "rounded-lg p-2 my-3 bg-gray-100 neumorph-1 text-center text-gray-800",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-      className: "bg-white p-5 ".concat(List.isFinished ? "opacity-50 line-through hover:no-underline hover:opacity-100" : "", " "),
-      children: [task, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-        onClick: finishTask,
-        className: "rounded-full h-7 w-7 border-2 border-black-200 mx-2 hover:border-black",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("svg", {
-          className: "h-5 w-5 text-black mx-0.5",
-          width: "24",
-          height: "24",
-          viewBox: "0 0 24 24",
-          "stroke-width": "2",
-          stroke: "currentColor",
-          fill: "none",
-          "stroke-linecap": "round",
-          "stroke-linejoin": "round",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("path", {
-            stroke: "none",
-            d: "M0 0h24v24H0z"
-          }), List.isFinished ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("line", {
-            x1: "18",
-            y1: "6",
-            x2: "6",
-            y2: "18"
-          }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("path", {
-            d: "M5 12l5 5l10 -10"
-          }), List.isFinished ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("line", {
-            x1: "6",
-            y1: "6",
-            x2: "18",
-            y2: "18"
-          }) : undefined]
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-        onClick: deleteHandler,
-        className: "rounded-full h-7 w-7 border-2 border-black-200  hover:border-black",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("svg", {
-          className: "h-5 w-5 text-black mx-0.5",
-          width: "24",
-          height: "24",
-          viewBox: "0 0 24 24",
-          "stroke-width": "2",
-          stroke: "currentColor",
-          fill: "none",
-          "stroke-linecap": "round",
-          "stroke-linejoin": "round",
-          children: ["  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("path", {
-            stroke: "none",
-            d: "M0 0h24v24H0z"
-          }), "  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("line", {
-            x1: "4",
-            y1: "7",
-            x2: "20",
-            y2: "7"
-          }), "  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("line", {
-            x1: "10",
-            y1: "11",
-            x2: "10",
-            y2: "17"
-          }), "  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("line", {
-            x1: "14",
-            y1: "11",
-            x2: "14",
-            y2: "17"
-          }), "  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("path", {
-            d: "M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"
-          }), "  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("path", {
-            d: "M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"
-          })]
-        })
-      })]
-    })
-  });
+
+  if (usertype == "admin") {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "rounded-lg p-2 my-3 bg-gray-100 neumorph-1 text-center text-gray-800",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "bg-white p-5 ".concat(List.isFinished ? "opacity-50 line-through hover:no-underline hover:opacity-100" : "", " "),
+        children: [task, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+          onClick: finishTask,
+          className: "rounded-full h-7 w-7 border-2 border-black-200 mx-2 hover:border-black",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("svg", {
+            className: "h-5 w-5 text-black mx-0.5",
+            width: "24",
+            height: "24",
+            viewBox: "0 0 24 24",
+            "stroke-width": "2",
+            stroke: "currentColor",
+            fill: "none",
+            "stroke-linecap": "round",
+            "stroke-linejoin": "round",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("path", {
+              stroke: "none",
+              d: "M0 0h24v24H0z"
+            }), List.isFinished ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("line", {
+              x1: "18",
+              y1: "6",
+              x2: "6",
+              y2: "18"
+            }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("path", {
+              d: "M5 12l5 5l10 -10"
+            }), List.isFinished ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("line", {
+              x1: "6",
+              y1: "6",
+              x2: "18",
+              y2: "18"
+            }) : undefined]
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+          onClick: deleteHandler,
+          className: "rounded-full h-7 w-7 border-2 border-black-200  hover:border-black",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("svg", {
+            className: "h-5 w-5 text-black mx-0.5",
+            width: "24",
+            height: "24",
+            viewBox: "0 0 24 24",
+            "stroke-width": "2",
+            stroke: "currentColor",
+            fill: "none",
+            "stroke-linecap": "round",
+            "stroke-linejoin": "round",
+            children: ["  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("path", {
+              stroke: "none",
+              d: "M0 0h24v24H0z"
+            }), "  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("line", {
+              x1: "4",
+              y1: "7",
+              x2: "20",
+              y2: "7"
+            }), "  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("line", {
+              x1: "10",
+              y1: "11",
+              x2: "10",
+              y2: "17"
+            }), "  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("line", {
+              x1: "14",
+              y1: "11",
+              x2: "14",
+              y2: "17"
+            }), "  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("path", {
+              d: "M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"
+            }), "  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("path", {
+              d: "M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"
+            })]
+          })
+        })]
+      })
+    });
+  } else {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "rounded-lg p-2 my-3 bg-gray-100 neumorph-1 text-center text-gray-800",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "bg-white p-5 ".concat(List.isFinished ? "opacity-50 line-through hover:no-underline hover:opacity-100" : "", " "),
+        children: [task, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+          onClick: finishTask,
+          className: "rounded-full h-7 w-7 border-2 border-black-200 mx-2 hover:border-black",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("svg", {
+            className: "h-5 w-5 text-black mx-0.5",
+            width: "24",
+            height: "24",
+            viewBox: "0 0 24 24",
+            "stroke-width": "2",
+            stroke: "currentColor",
+            fill: "none",
+            "stroke-linecap": "round",
+            "stroke-linejoin": "round",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("path", {
+              stroke: "none",
+              d: "M0 0h24v24H0z"
+            }), List.isFinished ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("line", {
+              x1: "18",
+              y1: "6",
+              x2: "6",
+              y2: "18"
+            }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("path", {
+              d: "M5 12l5 5l10 -10"
+            }), List.isFinished ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("line", {
+              x1: "6",
+              y1: "6",
+              x2: "18",
+              y2: "18"
+            }) : undefined]
+          })
+        })]
+      })
+    });
+  }
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ValueDisplay);
@@ -41249,7 +41300,7 @@ webpackContext.id = "./resources/js/Pages sync recursive ^\\.\\/.*$";
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"_from":"axios@^0.21","_id":"axios@0.21.4","_inBundle":false,"_integrity":"sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==","_location":"/axios","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"axios@^0.21","name":"axios","escapedName":"axios","rawSpec":"^0.21","saveSpec":null,"fetchSpec":"^0.21"},"_requiredBy":["#DEV:/"],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.21.4.tgz","_shasum":"c67b90dc0568e5c1cf2b0b858c43ba28e2eda575","_spec":"axios@^0.21","_where":"C:\\\\Users\\\\Kashmel Galil Go\\\\Dropbox\\\\My PC (Cache-Laptop)\\\\Desktop\\\\3rd Year\\\\Projects\\\\appdev_finals\\\\timbertrack-appdev\\\\timbertrack","author":{"name":"Matt Zabriskie"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"bugs":{"url":"https://github.com/axios/axios/issues"},"bundleDependencies":false,"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}],"dependencies":{"follow-redirects":"^1.14.0"},"deprecated":false,"description":"Promise based HTTP client for the browser and node.js","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"homepage":"https://axios-http.com","jsdelivr":"dist/axios.min.js","keywords":["xhr","http","ajax","promise","node"],"license":"MIT","main":"index.js","name":"axios","repository":{"type":"git","url":"git+https://github.com/axios/axios.git"},"scripts":{"build":"NODE_ENV=production grunt build","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","examples":"node ./examples/server.js","fix":"eslint --fix lib/**/*.js","postversion":"git push && git push --tags","preversion":"npm test","start":"node ./sandbox/server.js","test":"grunt test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"},"typings":"./index.d.ts","unpkg":"dist/axios.min.js","version":"0.21.4"}');
+module.exports = JSON.parse('{"_args":[["axios@0.21.4","C:\\\\Users\\\\Kashmel Galil Go\\\\Dropbox\\\\My PC (Cache-Laptop)\\\\Desktop\\\\3rd Year\\\\Projects\\\\appdev_finals\\\\timbertrack-appdev\\\\timbertrack"]],"_development":true,"_from":"axios@0.21.4","_id":"axios@0.21.4","_inBundle":false,"_integrity":"sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==","_location":"/axios","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"axios@0.21.4","name":"axios","escapedName":"axios","rawSpec":"0.21.4","saveSpec":null,"fetchSpec":"0.21.4"},"_requiredBy":["#DEV:/","/@inertiajs/inertia"],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.21.4.tgz","_spec":"0.21.4","_where":"C:\\\\Users\\\\Kashmel Galil Go\\\\Dropbox\\\\My PC (Cache-Laptop)\\\\Desktop\\\\3rd Year\\\\Projects\\\\appdev_finals\\\\timbertrack-appdev\\\\timbertrack","author":{"name":"Matt Zabriskie"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"bugs":{"url":"https://github.com/axios/axios/issues"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}],"dependencies":{"follow-redirects":"^1.14.0"},"description":"Promise based HTTP client for the browser and node.js","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"homepage":"https://axios-http.com","jsdelivr":"dist/axios.min.js","keywords":["xhr","http","ajax","promise","node"],"license":"MIT","main":"index.js","name":"axios","repository":{"type":"git","url":"git+https://github.com/axios/axios.git"},"scripts":{"build":"NODE_ENV=production grunt build","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","examples":"node ./examples/server.js","fix":"eslint --fix lib/**/*.js","postversion":"git push && git push --tags","preversion":"npm test","start":"node ./sandbox/server.js","test":"grunt test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"},"typings":"./index.d.ts","unpkg":"dist/axios.min.js","version":"0.21.4"}');
 
 /***/ })
 

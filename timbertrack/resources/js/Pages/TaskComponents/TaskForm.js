@@ -1,7 +1,7 @@
 import React from 'react';
 import { Inertia } from '@inertiajs/inertia';
 
-export default function Form({employee, setEmployee , inputText, setInputText}) {
+export default function Form({employee, setEmployee , inputText, setInputText, listEmployees}) {
 
 
 
@@ -53,8 +53,11 @@ export default function Form({employee, setEmployee , inputText, setInputText}) 
         <form className="space-x-6" onSubmit= {handleSubmit}>
             <select id="employee_id" value= {employee.employee_id} onChange= {handleChange} className= "border-b border-gray-200">
                     <option value="Destination" selected hidden>Employee </option>
-                    <option value="32">John Legend</option>
-                    <option value="12">Grande</option>
+                    {listEmployees.map( employee => {
+                        return(
+                            <option value={employee.id}>{employee.name}</option>
+                        );
+                    })}
             </select>
 
             <input type="text" id="task" value = {inputText} onChange= {TextHandler} className= "border-b border-gray-200 w-3/5" placeholder="Task . . ."></input>

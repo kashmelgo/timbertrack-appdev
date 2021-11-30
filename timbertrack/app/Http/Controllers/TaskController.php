@@ -4,15 +4,25 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Task;
+use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
 class TaskController extends Controller
 {
     public function index(){
-        $task = Task :: all();
-        return Inertia::render('Task', ['task' => $task]);
+
+        $user = Auth::user();
+        if($user->usertype == "admin"){
+            $task = Task :: all();
+            $employee = User::where('usertype', "employee")->get();
+            return Inertia::render('Task', ['task' => $task, 'employee' => $employee]);
+        }else{
+            $task = Task::where('employee_id', $user->id)->get();
+            return Inertia::render('Task', ['task' => $task]);
+        }
     }
 
 
