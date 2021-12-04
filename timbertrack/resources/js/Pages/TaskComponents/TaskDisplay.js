@@ -8,6 +8,10 @@ export default function TaskDisplay({employee, List, usertype, user}) {
     const current = new Date();
     const date= `${current.getFullYear()}-${current.getMonth()+1}-${current.getDate()}`;
 >>>>>>> tasks
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 
     return (
         <div className="my-5  flex space-x-10 ">
