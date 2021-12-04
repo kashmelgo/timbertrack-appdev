@@ -4,9 +4,17 @@ import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link } from '@inertiajs/inertia-react';
+import { Inertia } from '@inertiajs/inertia';
+
+
 
 export default function Authenticated({ auth, header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
+
+    function TimeOut(){
+
+        Inertia.post(route("timeout", auth.user.id));
+    };
 
     return (
         <div className="min-h-screen bg-gray-100">
@@ -28,11 +36,19 @@ export default function Authenticated({ auth, header, children }) {
                                 <NavLink href={route('task')} active={route().current('task')}>
                                     Task
                                 </NavLink>
+                                {auth.user.usertype == 'admin' &&
+                                <NavLink href={route('report')} active={route().current('report')}>
+                                    Report
+                                </NavLink>
+                                }
                                 </>
                             </div>
                         </div>
 
                         <div className="hidden sm:flex sm:items-center sm:ml-6">
+                                <button onClick={TimeOut} className="inline-flex items-center px-3 py-2 border text-gray-400 hover:text-gray-500 hover: border-transparent focus:outline-none focus:text-gray-500 transition duration-150 ease-in-out">
+                                    Time Out
+                                </button>
                             <div className="ml-3 relative">
                                 <Dropdown>
                                     <Dropdown.Trigger>

@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Task;
 use App\Models\User;
 use Inertia\Inertia;
+use App\Models\Attendance;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -15,6 +16,8 @@ class TaskController extends Controller
     public function index(){
 
         $user = Auth::user();
+
+
         if($user->usertype == "admin"){
             $task = Task :: all();
             $employee = User::where('usertype', "employee")->get();
