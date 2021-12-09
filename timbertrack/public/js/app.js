@@ -5425,10 +5425,10 @@ function VerifyEmail(_ref) {
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Department.js":
-/*!******************************************!*\
-  !*** ./resources/js/Pages/Department.js ***!
-  \******************************************/
+/***/ "./resources/js/Pages/Departments.js":
+/*!*******************************************!*\
+  !*** ./resources/js/Pages/Departments.js ***!
+  \*******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -5552,7 +5552,6 @@ var Employees = function Employees(_ref) {
       deleteEmployee = _ref.deleteEmployee;
   var columns = react__WEBPACK_IMPORTED_MODULE_0__.useMemo(function () {
     return [{
-      // Code and Assigned will be shown in Admin page which will be implement in the future
       columns: [{
         Header: 'ID',
         accessor: 'id',
@@ -6036,6 +6035,183 @@ var StyledButton = Object(function webpackMissingModule() { var e = new Error("C
 
 /***/ }),
 
+/***/ "./resources/js/Pages/PayrollComponents/addrole.js":
+/*!*********************************************************!*\
+  !*** ./resources/js/Pages/PayrollComponents/addrole.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+Object(function webpackMissingModule() { var e = new Error("Cannot find module 'styled-components'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _Utilities_CloseForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Utilities/CloseForm */ "./resources/js/Pages/PayrollComponents/Utilities/CloseForm.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+var _templateObject, _templateObject2, _templateObject3, _templateObject4;
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+var addUrl = 'http://localhost:8080/api/add/roles/';
+
+function AddRole() {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    name: '',
+    department: '',
+    salary: '',
+    assigned: false
+  }),
+      _useState2 = _slicedToArray(_useState, 2),
+      role = _useState2[0],
+      setRole = _useState2[1];
+
+  var onChangeName = function onChangeName(event) {
+    setRole(_objectSpread(_objectSpread({}, role), {}, {
+      name: event.target.value
+    }));
+  };
+
+  var onChangeDepartment = function onChangeDepartment(event) {
+    setRole(_objectSpread(_objectSpread({}, role), {}, {
+      department: event.target.value
+    }));
+  };
+
+  var onChangeSalary = function onChangeSalary(event) {
+    setRole(_objectSpread(_objectSpread({}, role), {}, {
+      salary: event.target.value
+    }));
+  };
+
+  var isInputFieldEmpty = function isInputFieldEmpty() {
+    return role.name === '' || role.department === '' || role.salary === '' || role.assigned === null;
+  };
+
+  var handleSubmit = function handleSubmit() {
+    axios__WEBPACK_IMPORTED_MODULE_2___default().post(addUrl, role).then(function (res) {
+      console.log(res.data.data);
+      (0,_Utilities_CloseForm__WEBPACK_IMPORTED_MODULE_3__.closeForm)();
+    });
+  };
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(Wrapper, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+        className: "justify-content-md-center",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+          xs: 12,
+          sm: 9,
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(H6, {
+            children: "Please fill out the form to add a role and then click the submit button."
+          })
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+        className: "justify-content-md-center",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+          xs: 12,
+          sm: 9,
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(StyledCardHeader, {
+              children: "Add Role"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+                onSubmit: handleSubmit,
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+                  controlId: "addName",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+                    children: "Name"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+                    required: true,
+                    type: "text",
+                    name: "name",
+                    placeholder: "Please enter full name",
+                    value: role.name,
+                    onChange: onChangeName
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+                  controlId: "addDepartment",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+                    children: "Department"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+                    required: true,
+                    type: "text",
+                    name: "department",
+                    placeholder: "Please enter department",
+                    value: role.department,
+                    onChange: onChangeDepartment
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+                  controlId: "addSalary",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+                    children: "Salary"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+                    required: true,
+                    type: "number",
+                    name: "salary",
+                    value: role.salary,
+                    onChange: onChangeRole
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+                  variant: "danger",
+                  size: "sm",
+                  onClick: function onClick() {
+                    return (0,_Utilities_CloseForm__WEBPACK_IMPORTED_MODULE_3__.closeForm)();
+                  },
+                  children: "Cancel"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(StyledButton, {
+                  className: "style-button",
+                  size: "sm",
+                  type: "submit",
+                  disabled: isInputFieldEmpty(),
+                  children: "Submit"
+                })]
+              })
+            })]
+          })
+        })
+      })]
+    })
+  });
+}
+
+var Wrapper = Object(function webpackMissingModule() { var e = new Error("Cannot find module 'styled-components'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  margin-top: 50px;\n"])));
+var H6 = Object(function webpackMissingModule() { var e = new Error("Cannot find module 'styled-components'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  margin-bottom: 10px;\n  color: #858484;\n"])));
+var StyledCardHeader = Object(function webpackMissingModule() { var e = new Error("Cannot find module 'styled-components'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()))(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  background-color: #3277b2;\n  color: #ffffff;\n  font-weight: bold;\n"])));
+var StyledButton = Object(function webpackMissingModule() { var e = new Error("Cannot find module 'styled-components'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()))(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  margin-left: 5px;\n"])));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AddRole);
+
+/***/ }),
+
 /***/ "./resources/js/Pages/PayrollComponents/editdepartment.js":
 /*!****************************************************************!*\
   !*** ./resources/js/Pages/PayrollComponents/editdepartment.js ***!
@@ -6421,6 +6597,298 @@ var H6 = Object(function webpackMissingModule() { var e = new Error("Cannot find
 var StyledCardHeader = Object(function webpackMissingModule() { var e = new Error("Cannot find module 'styled-components'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()))(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  background-color: #eea33b;\n  color: #ffffff;\n  font-weight: bold;\n"])));
 var StyledButton = Object(function webpackMissingModule() { var e = new Error("Cannot find module 'styled-components'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()))(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  margin-left: 5px;\n"])));
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EditForm);
+
+/***/ }),
+
+/***/ "./resources/js/Pages/PayrollComponents/editrole.js":
+/*!**********************************************************!*\
+  !*** ./resources/js/Pages/PayrollComponents/editrole.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+Object(function webpackMissingModule() { var e = new Error("Cannot find module 'styled-components'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _Utilities_CloseForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Utilities/CloseForm */ "./resources/js/Pages/PayrollComponents/Utilities/CloseForm.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+var _templateObject, _templateObject2, _templateObject3, _templateObject4;
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+var url = 'http://localhost:8080/api/roles';
+var editUrl = 'http://localhost:8080/api/edit/roles';
+
+function EditSalary(props) {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    name: '',
+    department: '',
+    salary: '',
+    assigned: false
+  }),
+      _useState2 = _slicedToArray(_useState, 2),
+      role = _useState2[0],
+      setRole = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+      _useState4 = _slicedToArray(_useState3, 2),
+      errorMessage = _useState4[0],
+      setErrorMessage = _useState4[1];
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    axios__WEBPACK_IMPORTED_MODULE_2___default().get("".concat(url, "/").concat(props.match.params.id)).then(function (response) {
+      return setRole(_objectSpread(_objectSpread({}, role), {}, {
+        name: response.data.data.name,
+        department: response.data.data.email,
+        salary: response.data.data.role,
+        assigned: response.data.data.assigned
+      }));
+    })["catch"](function (err) {
+      return setErrorMessage('Fetch error. API is not available.');
+    });
+    console.log(errorMessage);
+  }, []);
+
+  var onChangeName = function onChangeName(event) {
+    setRole(_objectSpread(_objectSpread({}, role), {}, {
+      name: event.target.value
+    }));
+  };
+
+  var onChangeDepartment = function onChangeDepartment(event) {
+    setRole(_objectSpread(_objectSpread({}, role), {}, {
+      department: event.target.value
+    }));
+  };
+
+  var onChangeSalary = function onChangeSalary(event) {
+    setRole(_objectSpread(_objectSpread({}, salary), {}, {
+      salary: event.target.value
+    }));
+  };
+
+  var isInputFieldEmpty = function isInputFieldEmpty() {
+    return role.name === '' || role.department === '' || role.salary === '' || role.assigned === null;
+  };
+
+  var onClickSubmit = function onClickSubmit() {
+    axios__WEBPACK_IMPORTED_MODULE_2___default().patch("".concat(editUrl, "/").concat(props.match.params.id), role).then(function (response) {
+      return console.log(response.data.data);
+    });
+    (0,_Utilities_CloseForm__WEBPACK_IMPORTED_MODULE_3__.closeForm)();
+  };
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(Wrapper, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+        className: "justify-content-md-center",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+          xs: 12,
+          sm: 9,
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(H6, {
+            children: "Please change the information below to update role details then click the submit button."
+          })
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+        className: "justify-content-md-center",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+          xs: 12,
+          sm: 9,
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(StyledCardHeader, {
+              children: "Edit Role"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+                  controlId: "editName",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+                    children: "Name"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+                    required: true,
+                    name: "name",
+                    placeholder: "Please enter role name",
+                    value: role.name,
+                    onChange: onChangeName
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+                  controlId: "editDepartment",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+                    children: "Department"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+                    required: true,
+                    name: "department",
+                    placeholder: "Please enter department",
+                    value: role.department,
+                    onChange: onChangeDepartment
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+                  controlId: "editSalary",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+                    children: "Role"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+                    required: true,
+                    name: "salary",
+                    value: role.salary,
+                    onChange: onChangeSalary
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+                  variant: "danger",
+                  size: "sm",
+                  onClick: function onClick() {
+                    return (0,_Utilities_CloseForm__WEBPACK_IMPORTED_MODULE_3__.closeForm)();
+                  },
+                  children: "Cancel"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(StyledButton, {
+                  size: "sm",
+                  onClick: function onClick() {
+                    return onClickSubmit();
+                  },
+                  disabled: isInputFieldEmpty(),
+                  children: "Submit"
+                })]
+              })
+            })]
+          })
+        })
+      })]
+    })
+  });
+}
+
+var Wrapper = Object(function webpackMissingModule() { var e = new Error("Cannot find module 'styled-components'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  margin-top: 50px;\n"])));
+var H6 = Object(function webpackMissingModule() { var e = new Error("Cannot find module 'styled-components'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  margin-bottom: 10px;\n  color: #858484;\n"])));
+var StyledCardHeader = Object(function webpackMissingModule() { var e = new Error("Cannot find module 'styled-components'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()))(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  background-color: #eea33b;\n  color: #ffffff;\n  font-weight: bold;\n"])));
+var StyledButton = Object(function webpackMissingModule() { var e = new Error("Cannot find module 'styled-components'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()))(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  margin-left: 5px;\n"])));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EditSalary);
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Roles.js":
+/*!*************************************!*\
+  !*** ./resources/js/Pages/Roles.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-table'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap/Button'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-table/react-table.css'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+Object(function webpackMissingModule() { var e = new Error("Cannot find module 'styled-components'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+var _templateObject;
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+
+
+
+
+
+
+
+
+var Roles = function Roles(_ref) {
+  var filteredRoles = _ref.filteredRoles,
+      openEditForm = _ref.openEditForm,
+      deleteRole = _ref.deleteRole;
+  var columns = react__WEBPACK_IMPORTED_MODULE_0__.useMemo(function () {
+    return [{
+      columns: [{
+        Header: 'ID',
+        accessor: 'id',
+        minWidth: 50,
+        maxWidth: 60
+      }, {
+        Header: 'Name',
+        accessor: 'name'
+      }, {
+        Header: 'Department',
+        accessor: 'department'
+      }, {
+        Header: 'Salary',
+        accessor: 'salary'
+      }, {
+        Header: 'Assigned',
+        accessor: 'assigned',
+        show: false
+      }, {
+        Header: 'Actions',
+        id: 'actions',
+        width: 140,
+        Cell: function Cell(_ref2) {
+          var row = _ref2.row;
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap/Button'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+              variant: "warning",
+              size: "sm",
+              onClick: function onClick() {
+                return openEditForm(row.id);
+              },
+              children: "Edit"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(StyledButton, {
+              variant: "danger",
+              size: "sm",
+              onClick: function onClick() {
+                return deleteRole(row.id);
+              },
+              children: "Delete"
+            })]
+          });
+        }
+      }]
+    }];
+  }, []);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-table'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+    className: "-striped -highlight",
+    data: filteredRoles,
+    columns: columns,
+    defaultPageSize: 10,
+    style: {
+      borderColor: '#a5a4a4',
+      borderRadius: '5px',
+      borderStyle: 'outset'
+    }
+  });
+};
+
+var StyledButton = Object(function webpackMissingModule() { var e = new Error("Cannot find module 'styled-components'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-bootstrap/Button'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()))(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  margin-left: 5px;\n"])));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Roles);
 
 /***/ }),
 
@@ -43524,8 +43992,8 @@ var map = {
 	"./Auth/ResetPassword.js": "./resources/js/Pages/Auth/ResetPassword.js",
 	"./Auth/VerifyEmail": "./resources/js/Pages/Auth/VerifyEmail.js",
 	"./Auth/VerifyEmail.js": "./resources/js/Pages/Auth/VerifyEmail.js",
-	"./Department": "./resources/js/Pages/Department.js",
-	"./Department.js": "./resources/js/Pages/Department.js",
+	"./Departments": "./resources/js/Pages/Departments.js",
+	"./Departments.js": "./resources/js/Pages/Departments.js",
 	"./Employees": "./resources/js/Pages/Employees.js",
 	"./Employees.js": "./resources/js/Pages/Employees.js",
 	"./PayrollComponents/Utilities/CloseForm": "./resources/js/Pages/PayrollComponents/Utilities/CloseForm.js",
@@ -43538,10 +44006,16 @@ var map = {
 	"./PayrollComponents/adddepartment.js": "./resources/js/Pages/PayrollComponents/adddepartment.js",
 	"./PayrollComponents/addemployee": "./resources/js/Pages/PayrollComponents/addemployee.js",
 	"./PayrollComponents/addemployee.js": "./resources/js/Pages/PayrollComponents/addemployee.js",
+	"./PayrollComponents/addrole": "./resources/js/Pages/PayrollComponents/addrole.js",
+	"./PayrollComponents/addrole.js": "./resources/js/Pages/PayrollComponents/addrole.js",
 	"./PayrollComponents/editdepartment": "./resources/js/Pages/PayrollComponents/editdepartment.js",
 	"./PayrollComponents/editdepartment.js": "./resources/js/Pages/PayrollComponents/editdepartment.js",
 	"./PayrollComponents/editemployee": "./resources/js/Pages/PayrollComponents/editemployee.js",
 	"./PayrollComponents/editemployee.js": "./resources/js/Pages/PayrollComponents/editemployee.js",
+	"./PayrollComponents/editrole": "./resources/js/Pages/PayrollComponents/editrole.js",
+	"./PayrollComponents/editrole.js": "./resources/js/Pages/PayrollComponents/editrole.js",
+	"./Roles": "./resources/js/Pages/Roles.js",
+	"./Roles.js": "./resources/js/Pages/Roles.js",
 	"./Task": "./resources/js/Pages/Task.js",
 	"./Task.js": "./resources/js/Pages/Task.js",
 	"./TaskComponents/TaskDisplay": "./resources/js/Pages/TaskComponents/TaskDisplay.js",

@@ -4,10 +4,10 @@ import Button from 'react-bootstrap/Button';
 import 'react-table/react-table.css';
 import styled from 'styled-components';
 
-const Employees = ({
-  filteredEmployees,
+const Roles = ({
+  filteredRoles,
   openEditForm,
-  deleteEmployee,
+  deleteRole,
 }) => {
   const columns = React.useMemo(
     () => [
@@ -15,8 +15,8 @@ const Employees = ({
         columns: [
           { Header: 'ID', accessor: 'id', minWidth: 50, maxWidth: 60 },
           { Header: 'Name', accessor: 'name' },
-          { Header: 'Email', accessor: 'email' },
-          { Header: 'Role', accessor: 'role' },
+          { Header: 'Department', accessor: 'department' },
+          { Header: 'Salary', accessor: 'salary' },
           { Header: 'Assigned', accessor: 'assigned', show: false },
           {
             Header: 'Actions',
@@ -35,7 +35,7 @@ const Employees = ({
                   <StyledButton
                     variant="danger"
                     size="sm"
-                    onClick={() => deleteEmployee(row.id)}
+                    onClick={() => deleteRole(row.id)}
                   >
                     Delete
                   </StyledButton>
@@ -52,7 +52,7 @@ const Employees = ({
   return (
     <ReactTable
       className="-striped -highlight"
-      data={filteredEmployees}
+      data={filteredRoles}
       columns={columns}
       defaultPageSize={10}
       style={{
@@ -68,4 +68,4 @@ const StyledButton = styled(Button)`
   margin-left: 5px;
 `;
 
-export default Employees;
+export default Roles;
