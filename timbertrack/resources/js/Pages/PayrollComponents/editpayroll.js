@@ -13,6 +13,7 @@ function EditPayroll(props) {
       basesalary: '',
       overtime: '',
       rate: '',
+      gross: '',
       assigned:false,
     });
   const [errorMessage, setErrorMessage] = useState('');
@@ -27,6 +28,7 @@ function EditPayroll(props) {
           basesalary: response.data.data.basesalary,
           overtime: response.data.data.overtime,
           rate: response.data.data.rate,
+          gross: response.data.data.gross,
           assigned: response.data.data.assigned,
         }),
       )
@@ -62,6 +64,12 @@ function EditPayroll(props) {
     });
   };
 
+  const onChangeGross = event => {
+    setPayroll({
+      ...payroll,
+      gross: event.target.value,
+    });
+  };
 
   const isInputFieldEmpty = () => {
     return (
@@ -69,6 +77,7 @@ function EditPayroll(props) {
       payroll.basesalary === '' ||
       payroll.overtime === '' ||
       payroll.rate === '' ||
+      payroll.gross === '' ||
       payroll.assigned === null
     );
   };
@@ -137,6 +146,16 @@ function EditPayroll(props) {
                       name="rate"
                       value={payroll.rate}
                       onChange={onChangeRate}
+                    />
+                  </Form.Group>
+                  <Form.Group controlId="editGross">
+                    <Form.Label>Gross Income</Form.Label>
+                    <Form.Control
+                      required
+                      type="number"
+                      name="gross"
+                      value={payroll.gross}
+                      onChange={onChangeGross}
                     />
                   </Form.Group>
                   <Button

@@ -12,6 +12,7 @@ function AddPayroll() {
     basesalary: '',
     overtime: '',
     rate: '',
+    gross:'',
     assigned:false,
   });
 
@@ -42,12 +43,19 @@ function AddPayroll() {
       rate: event.target.value,
     });
   };
+  const onChangeGross = event => {
+    setPayroll({
+      ...payroll,
+      gross: event.target.value,
+    });
+  };
   const isInputFieldEmpty = () => {
     return (
       payroll.name === '' ||
       payroll.basesalary === '' ||
       payroll.overtime === '' ||
       payroll.rate === '' ||
+      payroll.gross === '' ||
       payroll.assigned === null
     );
   };
@@ -116,6 +124,16 @@ function AddPayroll() {
                       name="rate"
                       value={payroll.rate}
                       onChange={onChangeRate}
+                    />
+                  </Form.Group>
+                  <Form.Group controlId="addGross">
+                    <Form.Label>Gross Income</Form.Label>
+                    <Form.Control
+                      required
+                      type="number"
+                      name="gross"
+                      value={payroll.gross}
+                      onChange={onChangeGross}
                     />
                   </Form.Group>
                   <Button
