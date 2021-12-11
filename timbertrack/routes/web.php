@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PayrollController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Foundation\Application;
@@ -43,5 +44,6 @@ Route::delete('/task/{id}', [TaskController::class, 'destroy'])->name('task.dest
 Route::get('/report', [ReportController::class, 'index'])->name('report');
 Route::post('/report{id}', [ReportController::class, 'destroy'])->name('timeout');
 
+Route::get('/payroll', [PayrollController::class, 'index'])->name('payroll');
 require __DIR__.'/auth.php';
 
