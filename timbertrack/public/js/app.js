@@ -6395,18 +6395,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_table_6__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-table-6 */ "./node_modules/react-table-6/es/index.js");
-/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap/Button */ "./node_modules/react-bootstrap/esm/Button.js");
-/* harmony import */ var react_table_6_react_table_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-table-6/react-table.css */ "./node_modules/react-table-6/react-table.css");
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-table'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Button */ "./node_modules/react-bootstrap/esm/Button.js");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 var _templateObject;
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 
 
-
+ // import 'react-table-6/react-table.css';
 
 
 
@@ -6442,15 +6441,15 @@ var Employees = function Employees(_ref) {
         width: 140,
         Cell: function Cell(_ref2) {
           var row = _ref2.row;
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
               variant: "warning",
               size: "sm",
               onClick: function onClick() {
                 return openEditForm(row.id);
               },
               children: "Edit"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(StyledButton, {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(StyledButton, {
               variant: "danger",
               size: "sm",
               onClick: function onClick() {
@@ -6463,7 +6462,7 @@ var Employees = function Employees(_ref) {
       }]
     }];
   }, []);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_table_6__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'react-table'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
     className: "-striped -highlight",
     data: filteredEmployees,
     columns: columns,
@@ -6476,7 +6475,7 @@ var Employees = function Employees(_ref) {
   });
 };
 
-var StyledButton = (0,styled_components__WEBPACK_IMPORTED_MODULE_5__["default"])(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_4__["default"])(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  margin-left: 5px;\n"])));
+var StyledButton = (0,styled_components__WEBPACK_IMPORTED_MODULE_4__["default"])(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_3__["default"])(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  margin-left: 5px;\n"])));
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Employees);
 
 /***/ }),

@@ -1,13 +1,14 @@
 import React from 'react';
-import ReactTable from 'react-table-6';
+import ReactTable from 'react-table';
 import Button from 'react-bootstrap/Button';
-import 'react-table-6/react-table.css';
+// import 'react-table-6/react-table.css';
 import styled from 'styled-components';
 
 const Employees = ({
   filteredEmployees,
   openEditForm,
   deleteEmployee,
+  payrollEmployee,
 }) => {
   const columns = React.useMemo(
     () => [
@@ -39,6 +40,13 @@ const Employees = ({
                   >
                     Delete
                   </StyledButton>
+                  <Button
+                    variant="warning"
+                    size="sm"
+                    onClick={() => payrollEmployee(row.id)}
+                  >
+                    Edit
+                  </Button>
                 </div>
               );
             },

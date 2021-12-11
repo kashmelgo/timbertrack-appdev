@@ -7,13 +7,14 @@ import { closeForm } from './Utilities/CloseForm';
 const url = 'http://localhost:8080/api/roles';
 const editUrl = 'http://localhost:8080/api/edit/roles';
 
-function EditRole(props) {
-  const [role, setRole] = useState({
-    name: '',
-    department: '',
-    salary: '',
-    assigned:false,
-  });
+function EditPayroll(props) {
+    const [payroll, setPayroll] = useState({
+      name: '',
+      basesalary: '',
+      overtime: '',
+      rate: '',
+      assigned:false,
+    });
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
@@ -21,10 +22,11 @@ function EditRole(props) {
       .get(`${url}/${props.match.params.id}`)
       .then(response =>
         setRole({
-          ...role,
+          ...payroll,
           name: response.data.data.name,
-          department: response.data.data.email,
-          salary: response.data.data.role,
+          basesalary: response.data.data.basesalary,
+          overtime: response.data.data.overtime,
+          rate: response.data.data.rate,
           assigned: response.data.data.assigned,
         }),
       )
@@ -33,39 +35,47 @@ function EditRole(props) {
   }, []);
 
   const onChangeName = event => {
-    setRole({
-      ...role,
+    setPayroll({
+      ...payroll,
       name: event.target.value,
     });
   };
 
-  const onChangeDepartment = event => {
-    setRole({
-      ...role,
-      department: event.target.value,
+  const onChangeBaseSalary = event => {
+    setPayroll({
+      ...payroll,
+      basesalary: event.target.value,
     });
   };
 
-  const onChangeSalary = event => {
-    setRole({
-      ...salary,
-      salary: event.target.value,
+  const onChangeOvertime = event => {
+    setPayroll({
+      ...payroll,
+      overtime: event.target.value,
+    });
+  };
+
+  const onChangeRate = event => {
+    setPayroll({
+      ...payroll,
+      rate: event.target.value,
     });
   };
 
 
   const isInputFieldEmpty = () => {
     return (
-      role.name === '' ||
-      role.department === '' ||
-      role.salary === '' ||
-      role.assigned === null
+      payroll.name === '' ||
+      payroll.basesalary === '' ||
+      payroll.overtime === '' ||
+      payroll.rate === '' ||
+      payroll.assigned === null
     );
   };
 
   const onClickSubmit = () => {
     axios
-      .patch(`${editUrl}/${props.match.params.id}`, role)
+      .patch(`${editUrl}/${props.match.params.id}`, payroll)
       .then(response => console.log(response.data.data));
     closeForm();
   };
@@ -76,7 +86,7 @@ function EditRole(props) {
         <Row className="justify-content-md-center">
           <Col xs={12} sm={9}>
             <H6>
-              Please change the information below to update role
+              Please change the information below to update payroll
               details then click the submit button.
             </H6>
           </Col>
@@ -84,36 +94,49 @@ function EditRole(props) {
         <Row className="justify-content-md-center">
           <Col xs={12} sm={9}>
             <Card>
-              <StyledCardHeader>Edit Role</StyledCardHeader>
+              <StyledCardHeader>Edit Payroll</StyledCardHeader>
               <Card.Body>
-                <Form>
+                <Form onSubmit={handleSubmit}>
                   <Form.Group controlId="editName">
                     <Form.Label>Name</Form.Label>
                     <Form.Control
                       required
+                      type="text"
                       name="name"
-                      placeholder="Please enter role name"
-                      value={role.name}
+                      placeholder="Please enter full name"
+                      value={payroll.name}
                       onChange={onChangeName}
                     />
                   </Form.Group>
-                  <Form.Group controlId="editDepartment">
-                    <Form.Label>Department</Form.Label>
+                  <Form.Group controlId="editBaseSalary">
+                    <Form.Label>Base Salary</Form.Label>
                     <Form.Control
                       required
-                      name="department"
-                      placeholder="Please enter department"
-                      value={role.department}
-                      onChange={onChangeDepartment}
+                      type="number"
+                      name="basesalary"
+                      placeholder="Please enter base salary"
+                      value={payroll.basesalary}
+                      onChange={onChangeBaseSalary}
                     />
                   </Form.Group>
-                  <Form.Group controlId="editSalary">
-                    <Form.Label>Role</Form.Label>
+                  <Form.Group controlId="editOvertime">
+                    <Form.Label>Overtime</Form.Label>
                     <Form.Control
                       required
-                      name="salary"
-                      value={role.salary}
-                      onChange={onChangeSalary}
+                      type="text"
+                      name="overtime"
+                      value={payroll.overtime}
+                      onChange={onChangeOvertime}
+                    />
+                  </Form.Group>
+                  <Form.Group controlId="editRate">
+                    <Form.Label>Rate</Form.Label>
+                    <Form.Control
+                      required
+                      type="number"
+                      name="rate"
+                      value={payroll.rate}
+                      onChange={onChangeRate}
                     />
                   </Form.Group>
                   <Button
@@ -124,8 +147,9 @@ function EditRole(props) {
                     Cancel
                   </Button>
                   <StyledButton
+                    className="style-button"
                     size="sm"
-                    onClick={() => onClickSubmit()}
+                    type="submit"
                     disabled={isInputFieldEmpty()}
                   >
                     Submit
@@ -139,6 +163,7 @@ function EditRole(props) {
     </Wrapper>
   );
 }
+
 
 const Wrapper = styled.div`
   margin-top: 50px;
@@ -159,4 +184,4 @@ const StyledButton = styled(Button)`
   margin-left: 5px;
 `;
 
-export default EditRole;
+export default EditPayroll;
