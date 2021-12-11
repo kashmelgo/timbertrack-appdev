@@ -28,6 +28,8 @@
         "tailwindcss": "^2.1.2"
     },
     "dependencies": {
-        "react-router-dom": "^6.0.2"
+        "react-bootstrap": "^2.0.3",
+        "react-router-dom": "^6.0.2",
+        "react-table-6": "^6.11.0"
     }
 }
