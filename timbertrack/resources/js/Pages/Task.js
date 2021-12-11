@@ -3,6 +3,16 @@ import Authenticated from '@/Layouts/Authenticated';
 import { Head } from '@inertiajs/inertia-react';
 import Form from './TaskComponents/TaskForm';
 import TaskDisplay from './TaskComponents/TaskDisplay';
+<<<<<<< HEAD
+
+
+export default function Task(props) {
+
+    const [inputText, setInputText] = useState("");
+    const [employee, setEmployee] = useState([]);
+    const [day, setDay] = useState("Today");
+    const [employed, setEmployed] = useState([]);
+=======
 import { Inertia } from '@inertiajs/inertia';
 
 
@@ -21,6 +31,7 @@ export default function Task(props) {
     console.log(employee);
 
     const [inputText, setInputText] = useState("");
+>>>>>>> tasks
 
 
     return (
@@ -34,6 +45,36 @@ export default function Task(props) {
 
 
             <div className="py-12">
+<<<<<<< HEAD
+                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                     {/* admin */}
+                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+
+                    <div className="p-5 bg-white border-b border-gray-200 ">
+                        <Form
+                             inputText={inputText}
+                             setInputText={setInputText}
+                             day = {day}
+                             setDay={setDay}
+                             employee = {employee}
+                             employed = {employed}
+                             setEmployed={setEmployed}
+                             setEmployee = {setEmployee}
+
+                        />
+
+
+                    </div>
+
+
+                    </div>
+                     {/* end admin */}
+                    <TaskDisplay
+                         employed = {employed}
+                         employee = {employee}
+                         setEmployee = {setEmployee}
+                         />
+=======
             <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
 
@@ -58,6 +99,7 @@ export default function Task(props) {
                         List = {props.task}
                         user = {props.auth.user}
                         />
+>>>>>>> tasks
                 </div>
             </div>
         </Authenticated>
