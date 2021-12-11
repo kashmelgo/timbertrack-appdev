@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\Task;
 use Inertia\Inertia;
 use App\Models\Attendance;
 use Illuminate\Http\Request;
@@ -22,8 +23,8 @@ class ReportController extends Controller
             $date = Carbon::now();
             $employee = User::where('usertype', "employee")->get();
             $attendance = Attendance :: all();
-
-            return Inertia::render('Report', ['attendance' => $attendance,'employee' => $employee]);
+            $task = Task:: all();
+            return Inertia::render('Report', ['attendance' => $attendance,'employee' => $employee, 'task' => $task]);
     }
 
     /**
@@ -48,6 +49,9 @@ class ReportController extends Controller
 
             if($userList->date == $dateChecker && $userList->time_out == NULL){
                 $userList->time_out = $date;
+                $t1 = strtotime($userList->time_in);
+                $t2 = strtotime($date);
+                $userList->work_hours = gmdate('H:i', $t2 - $t1);
                 $userList->save();
             }
         }

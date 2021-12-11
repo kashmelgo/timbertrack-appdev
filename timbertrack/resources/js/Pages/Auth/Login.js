@@ -8,10 +8,12 @@ import ValidationErrors from '@/Components/ValidationErrors';
 import { Head, Link, useForm } from '@inertiajs/inertia-react';
 
 export default function Login({ status, canResetPassword }) {
+
     const { data, setData, post, processing, errors, reset } = useForm({
         email: '',
         password: '',
         remember: '',
+
     });
 
     useEffect(() => {
@@ -23,6 +25,7 @@ export default function Login({ status, canResetPassword }) {
     const onHandleChange = (event) => {
         setData(event.target.name, event.target.type === 'checkbox' ? event.target.checked : event.target.value);
     };
+
 
     const submit = (e) => {
         e.preventDefault();
@@ -51,6 +54,8 @@ export default function Login({ status, canResetPassword }) {
                         isFocused={true}
                         handleChange={onHandleChange}
                     />
+
+
                 </div>
 
                 <div className="mt-4">
@@ -64,6 +69,9 @@ export default function Login({ status, canResetPassword }) {
                         autoComplete="current-password"
                         handleChange={onHandleChange}
                     />
+
+
+
                 </div>
 
                 <div className="block mt-4">

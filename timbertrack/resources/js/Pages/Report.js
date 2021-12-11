@@ -3,10 +3,21 @@ import Authenticated from '@/Layouts/Authenticated';
 import { Head } from '@inertiajs/inertia-react';
 import AttendanceLog from './ReportComponents/AttendanceLog';
 import DatePicking from './ReportComponents/DatePicking';
+import Chart from './ReportComponents/Chart'
 
 export default function Report(props) {
     const [date, setDate] = useState(new Date());
+    const [finished, setFinished] = useState({
+        name: "Finished",
+        value: ""
+    })
+    const [unfinished, setUnfinished] = useState({
+        name: "Unfinished",
+        value: ""
+    })
 
+    console.log(finished)
+    console.log(unfinished)
     return (
 
         <Authenticated
@@ -25,6 +36,11 @@ export default function Report(props) {
                         <DatePicking
                             date={date}
                             setDate={setDate}
+                            unfinished = {unfinished}
+                            finished = {finished}
+                            setUnfinished = {setUnfinished}
+                            setFinished = {setFinished}
+                            task = {props.task}
                         />
 
                         </div>
@@ -32,12 +48,18 @@ export default function Report(props) {
                         <AttendanceLog
                             user= {props.employee}
                             attendance= {props.attendance}
+                            task = {props.task}
                             date = {date}
                         />
                     </div>
                     <div className="overflow-hidden shadow-sm sm:rounded-lg w-full ">
                         <div className="bg-white  shadow-sm sm:rounded-lg w-full p-6 mb-3">
-                            Chart pero ang version trash mao di mu work :)
+                            <Chart
+                                unfinished = {unfinished}
+                                finished = {finished}
+                                date={date}
+                                task = {props.task}
+                            />
                         </div>
                         {/* <Chart/> */}
                     </div>

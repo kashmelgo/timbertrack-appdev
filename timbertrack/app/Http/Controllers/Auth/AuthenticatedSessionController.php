@@ -35,6 +35,9 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
+
+
+
         $request->authenticate();
 
         $request->session()->regenerate();
@@ -59,7 +62,7 @@ class AuthenticatedSessionController extends Controller
         if($count == 1){
             $attendance = new Attendance;
             $attendance->employee_id = $user->id;
-            $attendance->date =  $date;
+            $attendance->date =  $date->toDateTimeString();
             $attendance->time_in= $date->format('H:i');
             $attendance->save();
         }

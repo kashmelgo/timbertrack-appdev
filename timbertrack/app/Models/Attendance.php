@@ -15,12 +15,13 @@ class Attendance extends Model
         'date',
         'time_in',
         'time_out',
+        'work_hours',
     ];
 
-    public function setDateAttribute($value)
-    {
-        $this->attributes['date'] = Carbon::createFromFormat('m/d/Y', $value)->format('Y-m-d');
-    }
+    // public function setDateAttribute($value)
+    // {
+    //     $this->attributes['date'] = Carbon::createFromFormat('m/d/Y', $value)->format('Y-m-d');
+    // }
 
     // public function getTime_InAttribute($time_in)
     // {
