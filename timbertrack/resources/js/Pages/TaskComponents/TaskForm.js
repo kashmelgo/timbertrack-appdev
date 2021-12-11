@@ -1,49 +1,71 @@
 import React from 'react';
+import { Inertia } from '@inertiajs/inertia';
+
+export default function Form({employee, setEmployee , inputText, setInputText, listEmployees}) {
 
 
-export default function Form({inputText, setInputText, setDay, day,employee, employed, setEmployed, setEmployee}) {
 
-    const inputTextHandler = (e) =>{
+    const TextHandler = (e) => {
         setInputText(e.target.value);
+    };
+
+    const textInput = () =>{
+
+        setEmployee(employee => ({
+            ...employee,
+            task: inputText,
+        }))
 
     };
 
-    const setEmployer = (e) => {
-        setEmployed(e.target.value);
-    }
+    const handleChange = (e) =>{
+        const key = e.target.id;
+        let value = e.target.value
+        const current = new Date();
 
-    const daySet = (e) =>{
-        setDay(e.target.value);
+        if(value === "Today"){
+            value =  `${current.getMonth()+1}/${current.getDate()}/${current.getFullYear()}`;
+        }else if (value === "Tomorrow"){
+            value =  `${current.getMonth()+1}/${current.getDate()+1}/${current.getFullYear()}`;
+        }
+
+        setEmployee(employee => ({
+            ...employee,
+            [key]: value,
+        }))
 
     };
 
 
-    const submitToDoHandler = (e) => {
+
+
+    const handleSubmit = (e) => {
 
       e.preventDefault();
 
+      Inertia.post('/task', employee)
 
-      setEmployee([
-            ...employee, {task: inputText , employee:employed , day: day, completed:false, id: Math.random() * 1000}
-        ]);
+      setInputText(" ");
 
-        setInputText('');
     };
 
     return (
-        <form className="space-x-6">
-            <select onChange={setEmployer} className= "border-b border-gray-200">
-                    <option value="Destination" selected disabled hidden>Employee </option>
-                    <option value="John Legend">John Legend</option>
-                    <option value="ariana">Grande</option>
+        <form className="space-x-6" onSubmit= {handleSubmit}>
+            <select id="employee_id" value= {employee.employee_id} onChange= {handleChange} className= "border-b border-gray-200">
+                    <option value="Destination" selected hidden>Employee </option>
+                    {listEmployees.map( employee => {
+                        return(
+                            <option value={employee.id}>{employee.name}</option>
+                        );
+                    })}
             </select>
 
-            <input type="text" value = {inputText} onChange= {inputTextHandler} className= "border-b border-gray-200 w-3/5" placeholder="Task . . ."></input>
-            <select  onChange={daySet} className= "border-b border-gray-200">
+            <input type="text" id="task" value = {inputText} onChange= {TextHandler} className= "border-b border-gray-200 w-3/5" placeholder="Task . . ."></input>
+            <select id="day" onChange={handleChange} className= "border-b border-gray-200">
                     <option value="Today">Today</option>
                     <option value="Tomorrow">Tomorrow</option>
             </select>
-            <button onClick= {submitToDoHandler} type="submit" className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+            <button type="submit" onClick= {textInput} className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
                     Insert
             </button>
         </form>
