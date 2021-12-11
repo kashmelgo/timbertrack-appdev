@@ -5549,16 +5549,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function Report(props) {
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
-    employee_id: "",
-    task: "",
-    day: date,
-    isFinished: false
-  }),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
       _useState2 = _slicedToArray(_useState, 2),
       employees = _useState2[0],
-      setEmployees = _useState2[1];
+      setemployees = _useState2[1];
 
+  console.log(props);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_Layouts_Authenticated__WEBPACK_IMPORTED_MODULE_1__["default"], {
     auth: props.auth,
     errors: props.errors,

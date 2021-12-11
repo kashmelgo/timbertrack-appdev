@@ -7,12 +7,8 @@ import 'material-icons/iconfont/material-icons.css';
 
 export default function Report(props) {
 
-    const [employees, setEmployees] = useState({
-        employee_id: "",
-        task: "",
-        day: date,
-        isFinished: false,
-    });
+    const [employees, setemployees] = useState(0);
+    console.log(props);
     return (
 
     <Authenticated
