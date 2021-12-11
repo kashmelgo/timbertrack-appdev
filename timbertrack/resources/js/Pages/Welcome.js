@@ -121,5 +121,5 @@ export default function Welcome(props,{ status, canResetPassword }) {
             </div>
         </Guest>
     );
-              
+
 }

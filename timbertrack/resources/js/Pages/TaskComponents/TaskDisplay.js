@@ -14,7 +14,7 @@ export default function TaskDisplay({employee, List, usertype, user}) {
 
                         {List.map( list => {
 
-                            if(list.day == date  && list.employee_id == employee.employee_id && (list.employee_id == user.id || user.usertype =="admin")){
+                            if(list.day < date  && list.employee_id == employee.employee_id && (list.employee_id == user.id || user.usertype =="admin")){
                                 return(
                                     <ValuesDisplay
                                         key= {employee.id}
@@ -56,7 +56,7 @@ export default function TaskDisplay({employee, List, usertype, user}) {
 
                         {List.map( list => {
 
-                            if(list.day == date  && list.employee_id == employee.employee_id && (list.employee_id == user.id || user.usertype =="admin")){
+                            if(list.day > date  && list.employee_id == employee.employee_id && (list.employee_id == user.id || user.usertype =="admin")){
 
                                 return(
                                     <ValuesDisplay

@@ -5610,7 +5610,7 @@ function TaskDisplay(_ref) {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
           children: "Past Due"
         }), List.map(function (list) {
-          if (list.day == date && list.employee_id == employee.employee_id && (list.employee_id == user.id || user.usertype == "admin")) {
+          if (list.day < date && list.employee_id == employee.employee_id && (list.employee_id == user.id || user.usertype == "admin")) {
             return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_Pages_TaskComponents_ValuesDisplay__WEBPACK_IMPORTED_MODULE_1__["default"], {
               List: list,
               employee: employee,
@@ -5642,7 +5642,7 @@ function TaskDisplay(_ref) {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
           children: "Tomorrow"
         }), List.map(function (list) {
-          if (list.day == date && list.employee_id == employee.employee_id && (list.employee_id == user.id || user.usertype == "admin")) {
+          if (list.day > date && list.employee_id == employee.employee_id && (list.employee_id == user.id || user.usertype == "admin")) {
             return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_Pages_TaskComponents_ValuesDisplay__WEBPACK_IMPORTED_MODULE_1__["default"], {
               List: list,
               employee: employee,
