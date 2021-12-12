@@ -46,7 +46,8 @@ Route::get('/report', [ReportController::class, 'index'])->name('report');
 Route::post('/report{id}', [ReportController::class, 'destroy'])->name('timeout');
 
 Route::get('/payroll', [PayrollController::class, 'index'])->name('payroll');
-Route::post('/payroll/{id}', [UserController::class, 'update'])->name('updateuser');
+Route::post('/payroll', [UserController::class, 'update'])->name('updateuser');
 Route::delete('/payroll/{id}', [UserController::class, 'destroy'])->name('deleteuser');
+
 require __DIR__.'/auth.php';
 
