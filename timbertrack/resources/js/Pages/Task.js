@@ -12,6 +12,7 @@ export default function Task(props) {
     const date= `${current.getMonth()+1}/${current.getDate()}/${current.getFullYear()}`;
     const usertype = props.auth.user.usertype;
 
+    console.log(props);
     const [employee, setEmployee] = useState({
         employee_id: "",
         task: "",

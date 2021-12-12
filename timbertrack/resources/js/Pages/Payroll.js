@@ -7,8 +7,7 @@ import 'material-icons/iconfont/material-icons.css';
 
 export default function Report(props) {
 
-    const [employees, setemployees] = useState(0);
-    console.log(props);
+    // const [employees, setemployees] = useState(0);
     return (
 
     <Authenticated

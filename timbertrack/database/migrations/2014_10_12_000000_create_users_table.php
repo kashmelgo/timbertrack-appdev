@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->enum('usertype', ['employee','admin'])->default('employee');
             $table->rememberToken();
+            $table->float('salary')->nullable();
             $table->timestamps();
         });
     }
