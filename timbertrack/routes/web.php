@@ -3,7 +3,6 @@
 use App\Http\Controllers\PayrollController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TaskController;
-use App\Http\Controllers\TempController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -34,7 +33,7 @@ Route::get('/', function () {
 //     return Inertia::render('Dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/dashboard', [TempController::class, 'index'])->name('dashboard');
+
 
 // Route::get('/task', function () {
 //     return Inertia::render('Task');
@@ -49,7 +48,7 @@ Route::get('/report', [ReportController::class, 'index'])->name('report');
 Route::post('/report{id}', [ReportController::class, 'destroy'])->name('timeout');
 
 Route::get('/payroll', [PayrollController::class, 'index'])->name('payroll');
-Route::post('/payroll/{id}', [UserController::class, 'update'])->name('updateuser');
+Route::post('/payroll/edit', [UserController::class, 'update'])->name('updateuser');
 Route::delete('/payroll/{id}', [UserController::class, 'destroy'])->name('deleteuser');
 require __DIR__.'/auth.php';
 

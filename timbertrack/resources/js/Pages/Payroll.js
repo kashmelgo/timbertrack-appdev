@@ -3,6 +3,7 @@ import Authenticated from '@/Layouts/Authenticated';
 import { Head } from '@inertiajs/inertia-react';
 import PayrollTable from './PayrollComponents/PayrollTable';
 import 'material-icons/iconfont/material-icons.css';
+import PayrollEmployee from './PayrollComponents/PayrollEmployee';
 
 
 export default function Report(props) {
@@ -18,10 +19,18 @@ export default function Report(props) {
     >
             <Head title="Payroll" />
 
+    {
+        props.auth.user.usertype == 'admin'? (
+            <PayrollTable
+            employees = {props.employees}
+            />
+        ) : (
+            <PayrollEmployee
+                props = {props}
+            />
+        )
+    }
 
-    <PayrollTable
-        employees = {props.employees}
-    />
 
     </Authenticated>
     );

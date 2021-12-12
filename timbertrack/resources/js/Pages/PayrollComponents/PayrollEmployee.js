@@ -12,13 +12,13 @@ export default function PayrollEmployee ({props}){
             <div className=" flex space-x-5 ">
                 <div className=" bg-white overflow-hidden shadow-sm sm:rounded-lg w-full p-6 mt-6">
                     <div className="p-6 bg-white border-b border-gray-200 ">
-                        Salary Per Hour :
+                        Salary Per Hour : <b>{props.auth.user.salary}</b>
                     </div>
                     <div className="p-6 bg-white border-b border-gray-200 mt-6">
                         Total Work Hours of the Month : <b>{props.hours} </b>
                     </div>
                     <div className="p-6 bg-white border-b border-gray-200 mt-6">
-                        Income of the Month :
+                        Income of the Month : <b> {props.totalSalary}</b>
                     </div>
                 </div>
 

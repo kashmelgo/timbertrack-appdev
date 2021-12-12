@@ -70,7 +70,7 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
-        dd($request);
+
         $user = User::find($request->id);
         $user->salary = $request->salary;
         $user->save();
