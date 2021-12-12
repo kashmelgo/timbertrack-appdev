@@ -5569,6 +5569,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -5593,13 +5599,20 @@ function PayrollTable(_ref) {
       editingState = _useState2[0],
       setEditingState = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
+    id: "",
+    salary: ""
+  }),
       _useState4 = _slicedToArray(_useState3, 2),
       salary = _useState4[0],
       setSalary = _useState4[1];
 
   var salaryHandler = function salaryHandler(e) {
-    setSalary(e.target.value);
+    var key = e.target.id;
+    var value = e.target.value;
+    setSalary(function (salary) {
+      return _objectSpread(_objectSpread({}, salary), {}, _defineProperty({}, key, value));
+    });
   };
 
   function deleteHandler(id) {
@@ -5610,9 +5623,9 @@ function PayrollTable(_ref) {
     setEditingState(!editingState);
   }
 
-  function handleSubmit(e, id) {
+  function handleSubmit(e) {
     e.preventDefault();
-    _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__.Inertia.post(route('updateuser', id));
+    _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__.Inertia.post(route('updateuser', salary));
   }
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("section", {
@@ -5668,16 +5681,22 @@ function PayrollTable(_ref) {
                   className: "px-4 py-3 text-ms font-semibold border",
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("form", {
                     onSubmit: function onSubmit() {
-                      return handleSubmit(employee.id);
+                      return handleSubmit();
                     },
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
                       className: "shadow appearance-none border rounded py-2 px-3 w-1/2 text-gray-700 focus:outline-none focus:shadow-outline",
-                      value: salary,
+                      value: salary.salary,
                       onChange: salaryHandler,
                       id: "salary",
                       type: "number",
-                      step: ".02",
+                      step: "any",
                       placeholder: employee.salary
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                      type: "hidden",
+                      id: "id",
+                      name: "id",
+                      value: employee.id,
+                      onInput: salaryHandler
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
                       className: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded",
                       children: "Submit"

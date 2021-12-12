@@ -68,10 +68,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         dd($request);
-        $user = User::find($id);
+        $user = User::find($request->id);
         $user->salary = $request->salary;
         $user->save();
         return redirect('/payroll');

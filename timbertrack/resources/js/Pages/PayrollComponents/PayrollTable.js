@@ -4,10 +4,18 @@ import React, {useState} from 'react';
 export default function PayrollTable({employees}){
 
     const [editingState, setEditingState] = useState(false);
-    const [salary, setSalary] = useState(0);
+    const [salary, setSalary] = useState({
+        id: "",
+        salary: "",
+    });
 
     const salaryHandler = (e) => {
-        setSalary(e.target.value);
+        const key = e.target.id;
+        const value = e.target.value
+        setSalary(salary => ({
+            ...salary,
+            [key]: value,
+        }));
     };
 
     function deleteHandler(id){
@@ -18,10 +26,9 @@ export default function PayrollTable({employees}){
         setEditingState(!editingState);
     }
 
-    function handleSubmit(e, id){
+    function handleSubmit(e){
         e.preventDefault();
-
-        Inertia.post(route('updateuser', id))
+        Inertia.post(route('updateuser', salary))
     }
     return(
     <section className="container mx-auto p-6 font-mono">
@@ -53,8 +60,9 @@ export default function PayrollTable({employees}){
                                 {
                                     editingState ? (
                                         <td className="px-4 py-3 text-ms font-semibold border">
-                                            <form onSubmit={() => handleSubmit(employee.id)}>
-                                                <input className="shadow appearance-none border rounded py-2 px-3 w-1/2 text-gray-700 focus:outline-none focus:shadow-outline" value={salary} onChange={salaryHandler} id="salary" type="number" step=".02" placeholder={employee.salary} />
+                                            <form onSubmit={() => handleSubmit()}>
+                                                <input className="shadow appearance-none border rounded py-2 px-3 w-1/2 text-gray-700 focus:outline-none focus:shadow-outline" value={salary.salary} onChange={salaryHandler} id="salary" type="number" step="any" placeholder={employee.salary} />
+                                                <input type="hidden" id="id" name="id" value={employee.id} onInput={salaryHandler}></input>
                                                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                                     Submit
                                                 </button>
