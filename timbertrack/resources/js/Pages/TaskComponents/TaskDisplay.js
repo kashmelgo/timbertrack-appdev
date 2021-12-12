@@ -5,7 +5,6 @@ export default function TaskDisplay({employee, List, usertype, user}) {
     const current = new Date();
     const date= `${current.getFullYear()}-${current.getMonth()+1}-${current.getDate()}`;
 
-
     return (
         <div className="my-5  flex space-x-10 ">
                 <div className= "bg-white container shadow-lg px-6 py-2 h-auto w-1/3">
