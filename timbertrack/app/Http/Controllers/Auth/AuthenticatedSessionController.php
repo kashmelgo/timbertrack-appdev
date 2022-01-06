@@ -50,10 +50,11 @@ class AuthenticatedSessionController extends Controller
             if(Attendance::where('employee_id', $user->id)->doesntExist()){
                 $count = 1;
             }else{
+                $count = 1;
                 foreach ($check as $checker ){
                     if($user->id == $checker->employee_id){
-                        if($dateChecker != $checker->date){
-                            $count = 1;
+                        if($dateChecker == $checker->date  ){
+                            $count = 0;
                         }
                     }
                 }

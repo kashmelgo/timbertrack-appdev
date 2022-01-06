@@ -12,7 +12,11 @@ import 'moment/locale/it';
 export default function DatePicking({date, setDate, task ,setUnfinished , setFinished, unfinished, finished}) {
 
     const Changer = (day) =>{
-        setDate(`${day.getFullYear()}-${day.getMonth()+1}-${day.getDate()}`)
+
+        let month = `${day.getMonth()+1}` < 10? `0${day.getMonth()+1}`: `${day.getMonth()+1}`;
+        let days = `${day.getDate()}` < 10? `0${day.getDate()}`: `${day.getDate()}`;
+
+        setDate(`${day.getFullYear()}-${month}-${days}`)
         // setter();
     }
 

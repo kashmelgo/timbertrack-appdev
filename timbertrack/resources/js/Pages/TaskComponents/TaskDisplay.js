@@ -3,7 +3,9 @@ import ValuesDisplay from '@/Pages/TaskComponents/ValuesDisplay'
 
 export default function TaskDisplay({employee, List, usertype, user}) {
     const current = new Date();
-    const date= `${current.getFullYear()}-${current.getMonth()+1}-${current.getDate()}`;
+    let month = `${current.getMonth()+1}` < 10? `0${current.getMonth()+1}`: `${current.getMonth()+1}`;
+    let day = `${current.getDate()}` < 10? `0${current.getDate()}`: `${current.getDate()}`;
+    const date= `${current.getFullYear()}-${month}-${day}`;
 
     return (
         <div className="my-5  flex space-x-10 ">
@@ -15,6 +17,7 @@ export default function TaskDisplay({employee, List, usertype, user}) {
                         {List.map( list => {
 
                             if(list.day < date  && list.isFinished != 1 && list.employee_id == employee.employee_id && (list.employee_id == user.id || user.usertype =="admin")){
+
                                 return(
                                     <ValuesDisplay
                                         key= {employee.id}

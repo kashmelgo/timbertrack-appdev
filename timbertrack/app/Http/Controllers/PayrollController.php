@@ -31,6 +31,7 @@ class PayrollController extends Controller
                 }
             }
             $hours = date("g", strtotime($dd));
+
             $salary = (int)$hours * $user->salary;
 
             return Inertia::render('Payroll', ['attendance' => $attendance, 'hours' => $dd, 'totalSalary' => $salary]);

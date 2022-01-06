@@ -3,8 +3,8 @@ import React, { useCallback, useState } from "react";
 import { PieChart, Pie, Sector } from "recharts";
 
     const data = [
-        { name : 'Finished', value: 23},
-        { name : 'Unfinished', value: 25}
+        { name : 'Finished', value: 1},
+        { name : 'Unfinished', value: 2}
     ]
 
     const renderActiveShape = (props) => {
